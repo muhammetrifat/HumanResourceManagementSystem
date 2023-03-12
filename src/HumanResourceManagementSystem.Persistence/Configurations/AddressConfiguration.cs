@@ -9,6 +9,6 @@ public class AddressConfiguration : IEntityTypeConfiguration<Address>
 	public void Configure(EntityTypeBuilder<Address> builder)
 	{
 		throw new NotImplementedException();
-	}
+    }
 }
 

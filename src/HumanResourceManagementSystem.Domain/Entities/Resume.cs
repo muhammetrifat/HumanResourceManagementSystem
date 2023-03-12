@@ -2,10 +2,13 @@
 
 namespace HumanResourceManagementSystem.Domain.Entities;
 
+/// <summary>
+/// Özgeçmiş bilgilerini tutan entity sınıfıdır.
+/// </summary>
 public sealed class Resume : BaseAuditableEntity
 {
 	public long UserId { get; set; }
-	public User User { get; set; }
+	public User User { get; set; } = null!;
 	public Guid? ProfileId { get; set; }
 	public Profile? Profile { get; set; }
 	public ICollection<Education>?  Educations { get; set; }

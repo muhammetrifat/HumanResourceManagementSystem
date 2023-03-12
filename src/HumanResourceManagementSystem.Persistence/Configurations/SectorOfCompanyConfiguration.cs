@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HumanResourceManagementSystem.Persistence.Configurations;
 
-public class TaxOfficeOfCompanyConfiguration : IEntityTypeConfiguration<TaxOfficeOfCompany>
+public class SectorOfCompanyConfiguration : IEntityTypeConfiguration<SectorOfCompany>
 {
-	public void Configure(EntityTypeBuilder<TaxOfficeOfCompany> builder)
+	public void Configure(EntityTypeBuilder<SectorOfCompany> builder)
 	{
 		throw new NotImplementedException();
 	}
 }
+
 

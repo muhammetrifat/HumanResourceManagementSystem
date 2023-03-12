@@ -1,14 +1,19 @@
-﻿namespace HumanResourceManagementSystem.Domain.Entities;
+﻿using HumanResourceManagementSystem.Domain.Entities.Identity;
 
+namespace HumanResourceManagementSystem.Domain.Entities;
+
+/// <summary>
+/// Firma bilgilerini tutan entity sınıfıdır.
+/// </summary>
 public sealed class Company : BaseAuditableEntity
 {
-	public string Name { get; set; }
-	public string About { get; set; }
+    public string Name { get; set; } = null!;
+	public string About { get; set; } = null!;
 	public int NumberOfEmployees { get; set; }
-	public string Benefits { get; set; }
-	public string WebSiteUrl { get; set; }
-	public long AddressId { get; set; }
-	public Address Address { get; set; }
-	public int TaxOfficeId { get; set; }
-	public TaxOffice TaxOffice { get; set; }
+	public string? Benefits { get; set; }
+	public string? WebSiteUrl { get; set; }
+	public Guid AddressId { get; set; }
+	public Address Address { get; set; } = null!;
+	public string TaxNumber { get; set; } = null!;
+	public ICollection<User> Users { get; set; } = null!;
 }

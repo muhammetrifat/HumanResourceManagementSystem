@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HumanResourceManagementSystem.Persistence.Configurations;
 
-public class TaxOfficeConfiguration : IEntityTypeConfiguration<TaxOffice>
+public class ResumeCvConfiguration : IEntityTypeConfiguration<ResumeCv>
 {
-	public void Configure(EntityTypeBuilder<TaxOffice> builder)
+	public void Configure(EntityTypeBuilder<ResumeCv> builder)
 	{
 		throw new NotImplementedException();
 	}
 }
+
 

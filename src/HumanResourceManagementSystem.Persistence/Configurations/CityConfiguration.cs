@@ -8,7 +8,11 @@ public class CityConfiguration : IEntityTypeConfiguration<City>
 {
 	public void Configure(EntityTypeBuilder<City> builder)
 	{
-		throw new NotImplementedException();
+		builder.HasOne(s => s.Country)
+			.WithMany(g => g.Cities)
+			.HasForeignKey(s => s.CountryId);
+
+		builder.HasMany(x => x.Districts)
+			.WithOne(x => x.City);
 	}
 }
-

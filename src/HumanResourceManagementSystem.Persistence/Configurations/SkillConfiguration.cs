@@ -4,13 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HumanResourceManagementSystem.Persistence.Configurations;
 
-public class DistrictConfiguration : IEntityTypeConfiguration<District>
+public class SkillConfiguration : IEntityTypeConfiguration<Skill>
 {
-	public void Configure(EntityTypeBuilder<District> builder)
+	public void Configure(EntityTypeBuilder<Skill> builder)
 	{
-		builder.HasOne(x => x.City)
-			.WithMany(g => g.Districts)
-			.HasForeignKey(x => x.CityId);
+		throw new NotImplementedException();
 	}
 }
+
 

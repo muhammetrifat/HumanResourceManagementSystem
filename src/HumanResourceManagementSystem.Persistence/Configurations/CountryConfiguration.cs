@@ -8,7 +8,8 @@ public class CountryConfiguration : IEntityTypeConfiguration<Country>
 {
 	public void Configure(EntityTypeBuilder<Country> builder)
 	{
-		throw new NotImplementedException();
+		builder.HasMany(s => s.Cities)
+			.WithOne(g => g.Country);
 	}
 }
 
