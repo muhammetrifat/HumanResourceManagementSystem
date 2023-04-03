@@ -1,4 +1,5 @@
 ﻿using HumanResourceManagementSystem.Domain.Entities;
+using HumanResourceManagementSystem.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Security.Cryptography.X509Certificates;
@@ -9,19 +10,43 @@ public class AdvertisementConfiguration : IEntityTypeConfiguration<Advertisement
 {
 	public void Configure(EntityTypeBuilder<Advertisement> builder)
 	{
-		builder.Property(e => e.CompanyId)
-			.IsRequired();
+		// Primary key
+		builder.HasKey(e => e.Id);
 
-		builder.Property(e => e.DepartmentId)
-			.IsRequired();
+		// Relationships
 
-		builder.Property(e => e.UserId)
-			.IsRequired();
+		// One-to-many relationship with Company
+		builder.HasOne(e => e.Company)
+			.WithMany(r => r.Advertisements)
+			.HasForeignKey(e => e.CompanyId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+		// One-to-many relationship with Department
+		builder.HasOne(e => e.Department)
+			.WithMany(r => r.Advertisements)
+			.HasForeignKey(e => e.DepartmentId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+		// One-to-many relationship with JobApplication
+		builder.HasMany(e => e.JobApplications)
+			.WithOne(r => r.Advertisement)
+			.HasForeignKey(e => e.AdvertisementId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+		// One-to-many relationship with User
+		builder.HasOne(e => e.User)
+			.WithMany(r => r.Advertisements)
+			.HasForeignKey(e => e.CreatedBy)
+			.OnDelete(DeleteBehavior.Cascade);
+
+		// Validation rules
 
 		builder.Property(e => e.ExperienceStart)
+			.HasColumnType("decimal(5,2)")
 			.IsRequired();
 
 		builder.Property(e => e.ExperienceEnd)
+			.HasColumnType("decimal(5,2)")
 			.IsRequired();
 
 		builder.Property(e => e.Description)
@@ -29,18 +54,13 @@ public class AdvertisementConfiguration : IEntityTypeConfiguration<Advertisement
 			.HasMaxLength(1000);
 
 		builder.Property(e => e.IsCvRequired)
-			.HasDefaultValue(false)
-			.IsRequired();
-		
+			.IsRequired()
+			.HasColumnType("bit")
+			.HasDefaultValue(false);
+
 		builder.Property(e => e.WorkType)
+			.HasConversion(w => (int)w, w => (WorkTypes)w)
+			.HasColumnType("int")
 			.IsRequired();
-
-		//foreign keys
-
-		// buraya adres ile ilgili sorunu çözdükten sonra bakacağız
-		// hatta her configuration için adres muhabbeti bitince bi fluentapi configurationu yapmamız gerekiyor.
-
-
-
 	}
 }

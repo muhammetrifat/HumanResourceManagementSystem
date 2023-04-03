@@ -43,10 +43,10 @@ public class ApplicationDbContext : IdentityDbContext<User,Role,long>
     public DbSet<Address> Addresses { get; set; }
     public DbSet<City> Cities { get; set; }
     public DbSet<Company> Companies { get; set; }
-    public DbSet<CompanyDetail> CompanyDetails { get; set; }
+    //public DbSet<CompanyDetail> CompanyDetails { get; set; }
     public DbSet<Country> Countries { get; set; }
     public DbSet<Department> Departments { get; set; }
     public DbSet<District> Districts { get; set; }
-    public DbSet<TaxOffice> TaxOffices { get; set; }
-    public DbSet<TaxOfficeOfCompany> TaxOfficeOfCompanies { get; set; }
+    //public DbSet<TaxOffice> TaxOffices { get; set; }
+    //public DbSet<TaxOfficeOfCompany> TaxOfficeOfCompanies { get; set; }
 }

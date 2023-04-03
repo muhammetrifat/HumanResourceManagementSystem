@@ -7,10 +7,17 @@ namespace HumanResourceManagementSystem.Domain.Entities;
 /// </summary>
 public sealed class ResumeCv : BaseAuditableEntity
 {
-	public long UserId { get; set; }
-	public User User { get; set; } = null!;
-	public string FileName { get; set; } = null!;
-	public string FileExtension { get; set; } = null!;
-	public string File { get; set; } = null!;
+	public string FileName { get; set; } = null!; // Dosya ismi
+	public string FileExtension { get; set; } = null!; // Dosya uzantısı
+	public byte[] File { get; set; } = null!; // Dosya (Base64)
 
+
+	// Resume ile olan ilişkisi (1-1)
+	// 1 CV'nin 1 tane Özgeçmiş'i olacak
+	public Guid ResumeId { get; set; }
+	public Resume Resume { get; set; } = null!;
+
+	// JobApplication ile olan ilişkisi (1-n)
+	// 1 CV'nin N tane İş Başvuru'su olacak
+	public ICollection<JobApplication> JobApplications { get; set; } = null!;
 }

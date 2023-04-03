@@ -8,11 +8,27 @@ public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
 {
     public void Configure(EntityTypeBuilder<Department> builder)
     {
-        builder.Property(x => x.Name)
-            .HasMaxLength(100)
-            .IsRequired();
+        // Primary Key
+        builder.HasKey(d => d.Id);
 
-        builder.Property(x => x.Description)
-            .HasMaxLength(500);
-    }
+		// Relationships
+
+        // One-to-many relationship with Advertisement
+        builder.HasMany(d => d.Advertisements)
+			.WithOne(a => a.Department)
+			.HasForeignKey(d => d.DepartmentId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+        // Validation rules
+
+        builder.Property(d => d.Name)
+            .IsRequired()
+            .HasMaxLength(100);
+
+        builder.Property(d => d.Description)
+            .IsRequired()
+			.HasMaxLength(500);
+
+
+	}
 }

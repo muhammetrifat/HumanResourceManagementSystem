@@ -7,6 +7,43 @@ public class CompanyConfiguration : IEntityTypeConfiguration<Company>
 {
 	public void Configure(EntityTypeBuilder<Company> builder)
 	{
+		// Primary key
+		builder.HasKey(e => e.Id);
+
+		// Relationships
+
+		// One-to-one relationship with Address
+		builder.HasOne(e => e.Address)
+			.WithOne(r => r.Company)
+			.HasForeignKey<Company>(e => e.AddressId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+		// One-to-many relationship with User
+		builder.HasMany(e => e.Users)
+			.WithOne(r => r.Company)
+			.HasForeignKey(e => e.CompanyId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+		// One-to-many relationship with Advertisement
+		builder.HasMany(e => e.Advertisements)
+			.WithOne(r => r.Company)
+			.HasForeignKey(e => e.CompanyId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+		// One-to-many relationship with SectorsOfCompanies
+		builder.HasMany(e => e.SectorsOfCompanies)
+			.WithOne(r => r.Company)
+			.HasForeignKey(e => e.CompanyId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+		// One-to-many relationship with JobApplications
+		builder.HasMany(e => e.JobApplications)
+			.WithOne(r => r.Company)
+			.HasForeignKey(e => e.CompanyId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+
+		// Validation rules
 		builder.Property(e => e.Name)
 			.IsRequired()
 			.HasMaxLength(100);
@@ -16,26 +53,22 @@ public class CompanyConfiguration : IEntityTypeConfiguration<Company>
 			.HasMaxLength(1000);
 
 		builder.Property(e => e.NumberOfEmployees)
-			.IsRequired();
+			.IsRequired()
+			.HasColumnType("int")
+			.HasDefaultValue(0);
 
 		builder.Property(e => e.Benefits)
-			.HasMaxLength(1000);
+			.IsRequired(false)
+			.HasMaxLength(2000);
 
 		builder.Property(e => e.WebSiteUrl)
-			.HasMaxLength(100);
-
-		builder.Property(e => e.AddressId)
-			.IsRequired();
+			.IsRequired(false)
+			.HasMaxLength(200);
 
 		builder.Property(e => e.TaxNumber)
 			.IsRequired()
-			.HasMaxLength(100);
+			.HasMaxLength(20);
 
-		builder.HasMany(e => e.Users)
-			.WithOne(e => e.Company)
-			.HasForeignKey(e => e.CompanyId);
-
-		// TODO: burada adres tablosunun ilişkileri ile ilgili işlemler yapılacak
 	}
 }
 

@@ -7,17 +7,21 @@ namespace HumanResourceManagementSystem.Domain.Entities;
 /// </summary>
 public sealed class Profile : BaseAuditableEntity
 {
+	public string FirstName { get; set; } = null!; // İsim
+	public string LastName { get; set; } = null!; // Soyisim
+	public string FullName => $"{FirstName} {LastName}"; // Tam isim
+	public string? About { get; set; } // Hakkında
+	public string Email { get; set; } = null!; // Email
+	public int Age => DateTime.Now.Year - BirthDate.Year; // Yaş
+	public Genders Gender { get; set; } // Cinsiyet
+	public DateTime BirthDate { get; set; } // Doğum tarihi
+	public string? WebSiteUrl { get; set; } // Web sitesi URL
+
+
+	// Resume ile olan ilişkisi (1-1)
+	// 1 Profil'in 1 tane Özgeçmiş'i olacak
 	public Guid ResumeId { get; set; }
 	public Resume Resume { get; set; } = null!;
-	public string FirstName { get; set; } = null!;
-	public string LastName { get; set; } = null!;
-	public string FullName => $"{FirstName} {LastName}";
-	public string? About { get; set; }
-	public string Email { get; set; } = null!;
-	public DateTime BirthDate { get; set; }
-	public int Age => DateTime.Now.Year - BirthDate.Year;
-	public Genders Gender { get; set; }
-	public string? WebSiteUrl { get; set; }
 
 
 }

@@ -8,11 +8,32 @@ public class CityConfiguration : IEntityTypeConfiguration<City>
 {
 	public void Configure(EntityTypeBuilder<City> builder)
 	{
-		builder.HasOne(s => s.Country)
-			.WithMany(g => g.Cities)
-			.HasForeignKey(s => s.CountryId);
+		// Primary key
+		builder.HasKey(e => e.Id);
 
-		builder.HasMany(x => x.Districts)
-			.WithOne(x => x.City);
+		// Relationships
+
+		// One-to-many relationship with Country
+		builder.HasOne(e => e.Country)
+			.WithMany(r => r.Cities)
+			.HasForeignKey(e => e.CountryId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+		// One-to-many relationship with District
+		builder.HasMany(e => e.Districts)
+			.WithOne(r => r.City)
+			.HasForeignKey(e => e.CityId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+		// One-to-many relationship with Address
+		builder.HasMany(e => e.Addresses)
+			.WithOne(r => r.City)
+			.HasForeignKey(e => e.CountryId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+		// Validation rules
+		builder.Property(e => e.Name)
+			.IsRequired()
+			.HasMaxLength(100);
 	}
 }
