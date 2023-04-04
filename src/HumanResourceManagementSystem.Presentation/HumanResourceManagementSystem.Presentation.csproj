@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Middlewares\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HumanResourceManagementSystem.Application\HumanResourceManagementSystem.Application.csproj" />
+    <ProjectReference Include="..\HumanResourceManagementSystem.Infrastructure\HumanResourceManagementSystem.Infrastructure.csproj" />
+    <ProjectReference Include="..\HumanResourceManagementSystem.Persistence\HumanResourceManagementSystem.Persistence.csproj" />
+    <ProjectReference Include="..\HumanResourceManagementSystem.WebApi\HumanResourceManagementSystem.WebApi.csproj" />
+  </ItemGroup>
+
+</Project>
